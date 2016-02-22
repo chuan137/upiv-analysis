@@ -9,10 +9,10 @@ import helper
 from pykalman import *
 from tifffile import *
 from munkres import Munkres
-from model import Track, timestep, ndim, poslim
+from kamodel import Track, timestep, ndim, poslim
 
 # Parameters
-ring_hough_file = '../data/rings_hough_sample_b.txt'
+ring_hough_file = '../data/smp_b_hough.txt'
 
 # load rings
 rings = helper.read_rings(ring_hough_file, cols=(0,1))
@@ -82,10 +82,10 @@ for _n, _obs in enumerate(rings[1:]):
         plt.pause(1)
 
 plot(active_tracks, dead_tracks)
-fig.savefig('figs/tracks.png')
+fig.savefig('figs/smp_b_tracks.png')
 
 tracks = [ t() for t in  active_tracks + dead_tracks ]
 tracks = [ t for t in tracks if len(t) > 5 ]
-with open('tracks.pkl', 'wb') as f:
+with open('../data/smp_b_tracks.pkl', 'wb') as f:
     pickle.dump(tracks, f)
 
