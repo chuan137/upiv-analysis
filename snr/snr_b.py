@@ -11,9 +11,9 @@ from azimuthal import radial_profile_simple
 from helper import print_stats, read_rings
 
 
-with open('./tracks.pkl', 'rb') as f:
+with open('../data/smp_b_tracks.pkl', 'rb') as f:
     tracks = pickle.load(f)
-rings = read_rings('../data/rings_hough_sample_b.txt')
+rings = read_rings('../data/smp_b_hough.txt')
 
 
 rings_per_frame = {}
