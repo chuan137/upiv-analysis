@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-import sys, os
-sys.path.insert(0, os.path.realpath('../python'))
-
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
