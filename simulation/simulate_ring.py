@@ -2,11 +2,11 @@
 import sys, os
 sys.path.insert(0, os.path.realpath('../python'))
 
+import cv
 import numpy as np
 import numpy.random as rand
 import matplotlib.pyplot as plt 
 from matplotlib.image import imsave
-import cv
 import tifffile.tifffile as tif
 
 
