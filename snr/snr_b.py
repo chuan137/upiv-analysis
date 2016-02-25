@@ -29,7 +29,7 @@ for t in tracks:
 
 for f in sorted(rings_per_frame.keys()):
 
-    img_path = '../data_raw/sample_b/'
+    img_path = '../data/raw/sample_b'
     img_file_name = '{:05d}.tif'.format(int(f))
     img_data = tif.imread(os.path.join(img_path, img_file_name))
     centers = rings_per_frame[f]
@@ -45,7 +45,7 @@ for f in sorted(rings_per_frame.keys()):
         plist = []
         for _x in range(cx-1, cx+2):
             for _y in range(cy-1, cy+2):
-                r, peak = radial_profile_simple(img_data, c, est_r)
+                _, r, peak = radial_profile_simple(img_data, (_x,_y), est_r)
                 plist.append([r, peak, _x, _y])
 
         r, peak, x0, y0 = max(plist, key=operator.itemgetter(1))

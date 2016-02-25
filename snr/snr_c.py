@@ -27,6 +27,13 @@ for i,rings in enumerate(ring_frame):
     for r in rings:
         r[2] = est_radii[i]
 
+# import copy
+# ring_filter = [list(r) for r in ring_filter]
+# ring_frame  = [copy.deepcopy(ring_filter) for i in range(len(ring_frame))]
+# for i,rings in enumerate(ring_frame):
+#     for r in rings:
+#         r.append(est_radii[i])
+
 
 def iterneighbours(x, y, r=1):
     for _x in range(x-r, x+r+1):
@@ -45,7 +52,7 @@ for i,rings in enumerate(ring_frame):
 
         plist = []
         for _x,_y in iterneighbours(cx, cy):
-            r, peak = radial_profile_simple(img_data, (cx,cy), est_r)
+            _, r, peak = radial_profile_simple(img_data, (_x,_y), est_r)
             plist.append([r, peak, _x, _y])
 
         r, peak, x0, y0 = max(plist, key=operator.itemgetter(1))
