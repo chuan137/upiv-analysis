@@ -37,20 +37,28 @@ for flag, r, snr in data_b:
 for flag, r, snr in data_r:
     axes.scatter(r, snr_i(snr), c='r', alpha=0.4)
 
+#snrlim = axes.get_ylim()
+snrlim = -40, 30
+
 bsize = 2
 bins = np.arange(-40,30,bsize)
 axes = fig.add_subplot(222)
 axes.set_xlabel('SNR')
+axes.set_xlim(snrlim)
 nb,_,_ = axes.hist([ snr_i(d[2]) for d in data_b ], bins=bins, color='b')
+ylim = axes.get_ylim()
 
 axes = fig.add_subplot(223)
 axes.set_xlabel('SNR')
+axes.set_xlim(snrlim)
+axes.set_ylim(ylim)
 nr,bins,_ = axes.hist([ snr_i(d[2]) for d in data_r ], bins=bins, color='r')
 
 pb = nb/(nb+nr)
-# pb[np.isnan(pb)] = 0.0
 bins = 0.5 * (bins[1:] + bins[:-1])
 axes = fig.add_subplot(224)
+axes.set_xlabel('SNR')
+axes.set_xlim(snrlim)
 axes.set_ylim(-10, 120)
 axes.plot(bins, 100*pb, 'go')
 
