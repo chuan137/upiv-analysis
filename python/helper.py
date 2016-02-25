@@ -185,6 +185,17 @@ def read_rings(ring_file, cols=(0,1,2)):
 
 
 def loadtxt(fname, usecols=None):
+    numeric_const_pattern = r"""
+        [-+]? # optional sign
+        (?:
+            (?: \d* \. \d+ ) # .1 .12 .123 etc 9.1 etc 98.1 etc
+            |
+            (?: \d+ \.? ) # 1. 12. 123. etc 1 12 123 etc
+        )
+        # followed by optional exponent part if desired
+        (?: [Ee] [+-]? \d+ ) ?
+    """
+    rx = re.compile(numeric_const_pattern, re.VERBOSE)
     data = []
     with open(fname, 'r') as f:
 
@@ -192,8 +203,11 @@ def loadtxt(fname, usecols=None):
             if line.startswith('#'):
                 continue
 
-            scan = re.findall('[\d\.]+', line)
+            scan = rx.findall(line)
             scan = np.array(map(float, scan))
+
+            if len(scan) == 0:
+                continue
 
             if usecols:
                 usecols = list(usecols)
